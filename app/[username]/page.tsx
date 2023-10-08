@@ -9,7 +9,7 @@ const page = ({ params }: IUsernameProps) => {
   // If this user isn't the one logged in have [add] or [remove friend] button to perform that action
   return (
     <div className="flex min-h-screen flex-col items-center justify-start p-24">
-      <h1>My Posts</h1>
+      <h1>{`${params.username}'s Posts`}</h1>
       <p>What amazing insights!</p>
       <UserInfo titleUser={params.username} />
     </div>
