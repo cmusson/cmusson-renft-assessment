@@ -1,9 +1,10 @@
 "use client";
 import { useAppContext } from "@/app/context/appContext";
 import { IPost } from "@/app/typings/interfaces";
+import Link from "next/link";
 
 interface IPostsListProps {
-  type: "all" | "friends" | "myPosts";
+  type: "all" | "friends" | "myPosts" | "userPosts";
 }
 
 const PostsList = ({ type }: IPostsListProps) => {
@@ -54,6 +55,8 @@ const PostsList = ({ type }: IPostsListProps) => {
       ? allPostsArray
       : type === "friends"
       ? friendsPostArray
+      : type === "userPosts"
+      ? friendsPostArray
       : myPostsArray;
 
   return (
@@ -67,7 +70,11 @@ const PostsList = ({ type }: IPostsListProps) => {
           })
           .map((post, i) => (
             <div key={i} className="border">
-              {type !== "myPosts" ? <div>{post.username}</div> : <></>}
+              {type !== "myPosts" ? (
+                <Link href={`/${post.username}`}>{post.username}</Link>
+              ) : (
+                <></>
+              )}
               <div>{formatTimeStamp(post.timestamp)}</div>
               <div>{post.content}</div>
             </div>

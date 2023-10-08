@@ -1,4 +1,4 @@
-import PostsList from "../components/PostsList";
+import UserInfo from "../components/UserInfo";
 
 interface IUsernameProps {
   params: { username: string };
@@ -11,11 +11,7 @@ const page = ({ params }: IUsernameProps) => {
     <div>
       <h1>{params.username}</h1>
       <p>List of posts from this user sorted by date</p>
-      <PostsList type="myPosts" />
-      <p>
-        If this user is not the one logged in have [add] or [remove friend]
-        button to perform that action
-      </p>
+      <UserInfo titleUser={params.username} />
     </div>
   );
 };
