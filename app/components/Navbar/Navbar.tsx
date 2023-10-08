@@ -27,7 +27,7 @@ const Navbar = () => {
   // screen size < 500 is mobile
 
   const standardNavBar = (
-    <div className="flex items-center gap-2 p-4 border">
+    <div className="flex items-center gap-2 p-4 border-b">
       {navItems.map((item, index) => (
         <Link
           key={index}
@@ -41,7 +41,7 @@ const Navbar = () => {
   );
 
   const mobileNavbar = (
-    <div className="flex items-center justify-between gap-2 p-4 border">
+    <div className="flex items-center justify-between gap-2 p-4 border-b">
       <Link href="/" className="p-2 hover:bg-white hover:text-black">
         ƒ
       </Link>
@@ -56,7 +56,7 @@ const Navbar = () => {
 
   const mobileNavOptions = (
     <div
-      className={`fixed border top-0 right-0 h-full w-56 bg-zinc-800 transition-transform transform ${
+      className={`fixed border-t  border-b  border-l top-0 right-0 h-full w-48 bg-zinc-800 transition-transform transform ${
         openMobileNav ? "translate-x-0" : "translate-x-full"
       }`}
     >
