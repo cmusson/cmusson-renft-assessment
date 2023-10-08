@@ -1,3 +1,4 @@
 import SignOutButton from "./SignOutButton";
+import ModalButton from "./ModalButton";
 
-export { SignOutButton };
+export { SignOutButton, ModalButton };
