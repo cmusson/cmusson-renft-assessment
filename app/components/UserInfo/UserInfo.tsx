@@ -94,23 +94,21 @@ const UserInfo = ({ titleUser }: IUserInfoProps) => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col items-center">
+      {isOwnInfoPage() ? (
+        <></>
+      ) : (
+        <button
+          className="border p-2 border rounded hover:bg-white hover:text-black"
+          onClick={addFriendButton() ? addFriend : removeFriend}
+        >
+          {addFriendButton() ? "Add Friend" : "Unfriend"}
+        </button>
+      )}
       <PostsList
         type={isOwnInfoPage() ? "myPosts" : "userPosts"}
         titleUser={titleUser}
       />
-      <p>
-        If this user is not the one logged in, have [add] or [remove friend]
-        button to perform that action
-      </p>
-
-      {isOwnInfoPage() ? (
-        <></>
-      ) : (
-        <button onClick={addFriendButton() ? addFriend : removeFriend}>
-          {addFriendButton() ? "Add Friend" : "Remove Friend"}
-        </button>
-      )}
     </div>
   );
 };

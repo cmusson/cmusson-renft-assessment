@@ -83,25 +83,31 @@ const Modal = ({ isOpen, handleClose }: IModal) => {
                 e.stopPropagation();
                 handleClose();
               }}
-              className="top-0 mb-1 text-center text-neutral-100 font-semibold px-2 bg-teal-600 rounded shadow hover:bg-teal-700"
+              className="top-0 mb-1 text-center border text-white font-semibold px-2 bg-transparent rounded shadow hover:bg-white hover:text-black"
             >
               (X)
             </button>
-            <div>
+            <div className="flex flex-col items-center p-12 gap-2">
               <h1>Create New Post</h1>
               <form
+                className="flex flex-col items-center gap-2"
                 onSubmit={(e) => {
                   e.preventDefault();
                   createPost();
                 }}
               >
                 <textarea
-                  className="text-black"
-                  placeholder="type post here"
+                  className="text-black rounded p-2"
+                  placeholder="What are you thinking about?"
                   value={postContent}
                   onChange={(e) => setPostContent(e.target.value)}
                 />
-                <button type="submit">post</button>
+                <button
+                  className="border p-2 border rounded hover:bg-white hover:text-black"
+                  type="submit"
+                >
+                  Post
+                </button>
               </form>
             </div>
           </div>

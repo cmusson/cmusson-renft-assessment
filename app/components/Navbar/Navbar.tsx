@@ -12,7 +12,9 @@ const Navbar = () => {
     <>
       {isAuthenticated ? (
         <div className="flex items-center gap-2 p-4 border">
-          <Link href="/">f</Link>
+          <Link className="p-2 hover:bg-white hover:text-black" href="/">
+            ƒ
+          </Link>
           <Link href="/feed">[My Feed]</Link>
           <Link href="/friends">[My Friends]</Link>
           <Link href={`/${user ? user.username : ""}`}>[My Profile]</Link>
@@ -20,7 +22,9 @@ const Navbar = () => {
         </div>
       ) : (
         <div className="flex items-center gap-2 p-4 border">
-          <Link href="/">f</Link>
+          <Link className="p-2 hover:bg-white hover:text-black" href="/">
+            ƒ
+          </Link>
           <Link href="/signIn">[Sign In]</Link>
           <Link href="/signUp">[Sign Up]</Link>
         </div>

@@ -11,7 +11,14 @@ const SignOutButton = () => {
     alert("IUser signed out");
     push("/");
   };
-  return <button onClick={signOut}>Sign Out</button>;
+  return (
+    <button
+      className="border p-2 border rounded hover:bg-white hover:text-black"
+      onClick={signOut}
+    >
+      Sign Out
+    </button>
+  );
 };
 
 export default SignOutButton;

@@ -58,7 +58,7 @@ const UserForm = ({ type }: IUserForm) => {
     if (user && user.password === password) {
       sessionStorage.setItem("currentUser", JSON.stringify(user));
       login();
-      push("/friends");
+      push("/feed");
       alert("logged in!");
     } else {
       alert("failed login!");
@@ -98,7 +98,7 @@ const UserForm = ({ type }: IUserForm) => {
       // Sign in the new user
       sessionStorage.setItem("currentUser", JSON.stringify(newUser));
       login();
-      push("/friends");
+      push("/feed");
       alert("Successfully signed up and logged in!");
     }
   };
@@ -119,7 +119,7 @@ const UserForm = ({ type }: IUserForm) => {
         }}
       >
         <input
-          className="text-black"
+          className="text-black p-1"
           placeholder="username"
           value={username}
           onChange={(e) => {
@@ -127,8 +127,9 @@ const UserForm = ({ type }: IUserForm) => {
           }}
         />
         <input
-          className="text-black"
+          className="text-black p-1"
           placeholder="password"
+          type="password"
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
@@ -136,7 +137,7 @@ const UserForm = ({ type }: IUserForm) => {
         />
 
         <button
-          className={`border ${
+          className={`border p-2 border rounded ${
             buttonDisabled
               ? "cursor-not-allowed"
               : "hover:bg-white hover:text-black"

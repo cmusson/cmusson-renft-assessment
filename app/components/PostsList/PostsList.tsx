@@ -5,7 +5,7 @@ import Link from "next/link";
 
 interface IPostsListProps {
   type: "all" | "friends" | "myPosts" | "userPosts";
-  titleUser: string;
+  titleUser?: string;
 }
 
 const PostsList = ({ type, titleUser }: IPostsListProps) => {
@@ -71,26 +71,27 @@ const PostsList = ({ type, titleUser }: IPostsListProps) => {
       : myPostsArray;
 
   return (
-    <div>
-      <div>
-        {postArray
-          .sort((a, b) => {
-            const timestampA = new Date(a.timestamp).getTime();
-            const timestampB = new Date(b.timestamp).getTime();
-            return timestampA - timestampB;
-          })
-          .map((post, i) => (
-            <div key={i} className="border">
-              {type !== "myPosts" ? (
-                <Link href={`/${post.username}`}>{post.username}</Link>
-              ) : (
-                <></>
-              )}
-              <div>{formatTimeStamp(post.timestamp)}</div>
-              <div>{post.content}</div>
-            </div>
-          ))}
-      </div>
+    <div className="flex flex-col gap-2 w-full mt-2">
+      {postArray
+        .sort((a, b) => {
+          const timestampA = new Date(a.timestamp).getTime();
+          const timestampB = new Date(b.timestamp).getTime();
+          return timestampA - timestampB;
+        })
+        .map((post, i) => (
+          <div key={i} className="border p-1">
+            {type !== "myPosts" ? (
+              <Link
+                className="hover:underline"
+                href={`/${post.username}`}
+              >{`${post.username}:`}</Link>
+            ) : (
+              <></>
+            )}
+            <div>{post.content}</div>
+            <div className="text-xs">{formatTimeStamp(post.timestamp)}</div>
+          </div>
+        ))}
     </div>
   );
 };

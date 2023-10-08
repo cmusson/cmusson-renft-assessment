@@ -13,8 +13,11 @@ const ModalButton = () => {
   }, []);
 
   return isAuthenticated ? (
-    <>
-      <button onClick={openCloseModal} className="border">
+    <div className="w-full h-20 p-2 flex justify-end">
+      <button
+        onClick={openCloseModal}
+        className="border rounded p-4 text-x hover:bg-white hover:text-black"
+      >
         {"(+)"}
       </button>
       {modalOpen ? (
@@ -22,9 +25,9 @@ const ModalButton = () => {
       ) : (
         <></>
       )}
-    </>
+    </div>
   ) : (
-    <></>
+    <div className="w-full h-20 p-2"></div>
   );
 };
 

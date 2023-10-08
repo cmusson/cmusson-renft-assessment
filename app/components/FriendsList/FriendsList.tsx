@@ -52,11 +52,18 @@ const FriendsList = () => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col items-center gap-2">
       {friends.map((friend, i) => (
-        <div key={i}>
-          <Link href={`/${friend}`}> {friend}</Link>
-          <button onClick={() => removeFriend(friend)}>Remove friend</button>
+        <div className="flex flex-col border p-2 gap-2" key={i}>
+          <Link className="hover:underline" href={`/${friend}`}>
+            {friend}
+          </Link>
+          <button
+            className="border p-2 border rounded hover:bg-white hover:text-black"
+            onClick={() => removeFriend(friend)}
+          >
+            unfriend
+          </button>
         </div>
       ))}
     </div>
