@@ -23,8 +23,24 @@ const UserForm = ({ type }: IUserForm) => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+
   const { login } = useAppContext();
   const { push } = useRouter();
+
+  const updateButtonState = () => {
+    // Regular expression to validate alphanumeric username with underscores
+    const usernameRegex = /^[a-zA-Z0-9_]+$/;
+
+    // Regular expression to validate password
+    const passwordRegex = /^(?!.*?(.)\1{2,})[a-zA-Z0-9]+$/;
+
+    const isUsernameValid = username.match(usernameRegex);
+    const isPasswordValid = password.match(passwordRegex);
+
+    // Enable the button only if both username and password are valid
+    setButtonDisabled(!isUsernameValid || !isPasswordValid);
+  };
 
   const userSignIn = () => {
     const userAccountsJSON = localStorage.getItem("userAccounts");
@@ -46,6 +62,7 @@ const UserForm = ({ type }: IUserForm) => {
   };
 
   const userSignUp = () => {
+    console.log("fired");
     // Read the current userAccounts from local storage
     const userAccountsJSON = localStorage.getItem("userAccounts");
     if (userAccountsJSON === null) {
@@ -102,6 +119,7 @@ const UserForm = ({ type }: IUserForm) => {
           value={username}
           onChange={(e) => {
             setUsername(e.target.value);
+            updateButtonState();
           }}
         />
         <input
@@ -110,10 +128,21 @@ const UserForm = ({ type }: IUserForm) => {
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
+            updateButtonState();
           }}
         />
 
-        <button type="submit">Submit</button>
+        <button
+          className={`border ${
+            buttonDisabled
+              ? "cursor-not-allowed"
+              : "hover:bg-white hover:text-black"
+          }`}
+          type="submit"
+          disabled={buttonDisabled}
+        >
+          Submit
+        </button>
       </form>
     </>
   );

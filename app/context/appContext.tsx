@@ -35,10 +35,19 @@ export const AppContextProvider = ({
   };
 
   useEffect(() => {
-    const initalAccounts = JSON.stringify(userAccounts);
-    localStorage.setItem("userAccounts", initalAccounts);
-    const initialUsers = getDataFromLocalStorage();
-    setUsers(initialUsers);
+    // Check if initialLoad exists in local storage
+    const hasInitialLoad = localStorage.getItem("initialLoad");
+
+    if (!hasInitialLoad) {
+      // Perform the initial data population and add initialLoad in local storage
+      const initalAccounts = JSON.stringify(userAccounts);
+      localStorage.setItem("userAccounts", initalAccounts);
+      const initialUsers = getDataFromLocalStorage();
+      setUsers(initialUsers);
+
+      // indicate initial data load has occurred
+      localStorage.setItem("initialLoad", "true");
+    }
   }, []);
 
   useEffect(() => {
