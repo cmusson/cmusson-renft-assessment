@@ -8,43 +8,32 @@ const Navbar = () => {
   // if logged in - Feed, Friends, Profile, Sign Out
   const { isAuthenticated, user } = useAppContext();
 
+  const navItems = isAuthenticated
+    ? [
+        { title: "ƒ", href: "/" },
+        { title: "[My Feed]", href: "/feed" },
+        { title: "[My Friends]", href: "/friends" },
+        { title: "[My Profile]", href: `/${user ? user.username : ""}` },
+        { title: "[Sign Out]", href: "/signOut" },
+      ]
+    : [
+        { title: "ƒ", href: "/" },
+        { title: "[Sign In]", href: "/signIn" },
+        { title: "[Sign Up]", href: "/signUp" },
+      ];
+
   return (
-    <>
-      {isAuthenticated ? (
-        <div className="flex items-center gap-2 p-4 border">
-          <Link className="p-2 hover:bg-white hover:text-black" href="/">
-            ƒ
-          </Link>
-          <Link className="p-2 hover:bg-white hover:text-black" href="/feed">
-            [My Feed]
-          </Link>
-          <Link className="p-2 hover:bg-white hover:text-black" href="/friends">
-            [My Friends]
-          </Link>
-          <Link
-            className="p-2 hover:bg-white hover:text-black"
-            href={`/${user ? user.username : ""}`}
-          >
-            [My Profile]
-          </Link>
-          <Link className="p-2 hover:bg-white hover:text-black" href="/signOut">
-            [Sign Out]
-          </Link>
-        </div>
-      ) : (
-        <div className="flex items-center gap-2 p-4 border">
-          <Link className="p-2 hover:bg-white hover:text-black" href="/">
-            ƒ
-          </Link>
-          <Link className="p-2 hover:bg-white hover:text-black" href="/signIn">
-            [Sign In]
-          </Link>
-          <Link className="p-2 hover:bg-white hover:text-black" href="/signUp">
-            [Sign Up]
-          </Link>
-        </div>
-      )}
-    </>
+    <div className="flex items-center gap-2 p-4 border">
+      {navItems.map((item, index) => (
+        <Link
+          key={index}
+          className="p-2 hover:bg-white hover:text-black"
+          href={item.href}
+        >
+          {item.title}
+        </Link>
+      ))}
+    </div>
   );
 };
 
