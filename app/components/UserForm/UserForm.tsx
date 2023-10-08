@@ -35,8 +35,12 @@ const UserForm = ({ type }: IUserForm) => {
     // Regular expression to validate password
     const passwordRegex = /^(?!.*?(.)\1{2,})[a-zA-Z0-9]+$/;
 
-    const isUsernameValid = username.match(usernameRegex);
-    const isPasswordValid = password.match(passwordRegex);
+    // Check if username and password are not empty strings
+    const isUsernameNotEmpty = username.trim() !== "";
+    const isPasswordNotEmpty = password.trim() !== "";
+
+    const isUsernameValid = isUsernameNotEmpty && username.match(usernameRegex);
+    const isPasswordValid = isPasswordNotEmpty && password.match(passwordRegex);
 
     // Enable the button only if both username and password are valid
     setButtonDisabled(!isUsernameValid || !isPasswordValid);
@@ -62,7 +66,6 @@ const UserForm = ({ type }: IUserForm) => {
   };
 
   const userSignUp = () => {
-    console.log("fired");
     // Read the current userAccounts from local storage
     const userAccountsJSON = localStorage.getItem("userAccounts");
     if (userAccountsJSON === null) {
@@ -102,7 +105,9 @@ const UserForm = ({ type }: IUserForm) => {
 
   const handleClick = type === "signIn" ? userSignIn : userSignUp;
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    updateButtonState();
+  }, [username, password]);
 
   return (
     <>
@@ -119,7 +124,6 @@ const UserForm = ({ type }: IUserForm) => {
           value={username}
           onChange={(e) => {
             setUsername(e.target.value);
-            updateButtonState();
           }}
         />
         <input
@@ -128,7 +132,6 @@ const UserForm = ({ type }: IUserForm) => {
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
-            updateButtonState();
           }}
         />
 
