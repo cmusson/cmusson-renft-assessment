@@ -3,7 +3,7 @@ import UserForm from "../components/UserForm";
 export default function SignUp() {
   // Form to sign up and login
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center justify-start gap-2 p-24">
       <h1>{`Sign Up`}</h1>
       <p>Enter a valid username and password to sign up</p>
       <div className="flex flex-col  text-xs">
