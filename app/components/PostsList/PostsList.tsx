@@ -5,14 +5,15 @@ import Link from "next/link";
 
 interface IPostsListProps {
   type: "all" | "friends" | "myPosts" | "userPosts";
+  titleUser: string;
 }
 
-const PostsList = ({ type }: IPostsListProps) => {
+const PostsList = ({ type, titleUser }: IPostsListProps) => {
   // list of posts with either all users for homepage
   // list of posts of a users friends if logged in
   // sorted most recent first
 
-  const { users, isAuthenticated, user } = useAppContext();
+  const { users, user } = useAppContext();
 
   const myPostsArray = user
     ? user.posts.map((post) => ({ username: user.username, ...post }))
@@ -50,13 +51,23 @@ const PostsList = ({ type }: IPostsListProps) => {
     return `${formattedDate}: ${formattedTime}`;
   };
 
+  const userPostsArray = users
+    .filter((u) => u.username === titleUser)
+    .flatMap((user) =>
+      user.posts.map((post) => ({
+        content: post.content,
+        timestamp: post.timestamp,
+        username: user.username,
+      }))
+    );
+
   const postArray =
     type === "all"
       ? allPostsArray
       : type === "friends"
       ? friendsPostArray
       : type === "userPosts"
-      ? friendsPostArray
+      ? userPostsArray
       : myPostsArray;
 
   return (

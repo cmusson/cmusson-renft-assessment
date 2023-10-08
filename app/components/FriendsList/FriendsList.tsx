@@ -2,6 +2,7 @@
 
 import { useAppContext } from "@/app/context/appContext";
 import { IUser } from "@/app/typings/interfaces";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const FriendsList = () => {
@@ -54,7 +55,7 @@ const FriendsList = () => {
     <div>
       {friends.map((friend, i) => (
         <div key={i}>
-          <div> {friend}</div>
+          <Link href={`/${friend}`}> {friend}</Link>
           <button onClick={() => removeFriend(friend)}>Remove friend</button>
         </div>
       ))}

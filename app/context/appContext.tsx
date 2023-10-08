@@ -9,6 +9,7 @@ const AppContext = createContext({
   logout: () => {},
   users: [] as IUser[],
   user: {} as IUser | undefined,
+  setUser: (user: IUser | undefined) => {},
 });
 
 export const useAppContext = () => useContext(AppContext);
@@ -72,7 +73,14 @@ export const AppContextProvider = ({
 
   return (
     <AppContext.Provider
-      value={{ isAuthenticated, login, logout, users, user }}
+      value={{
+        isAuthenticated,
+        login,
+        logout,
+        users,
+        user,
+        setUser,
+      }}
     >
       {children}
     </AppContext.Provider>

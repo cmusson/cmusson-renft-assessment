@@ -95,7 +95,10 @@ const UserInfo = ({ titleUser }: IUserInfoProps) => {
 
   return (
     <div>
-      <PostsList type={isOwnInfoPage() ? "myPosts" : "userPosts"} />
+      <PostsList
+        type={isOwnInfoPage() ? "myPosts" : "userPosts"}
+        titleUser={titleUser}
+      />
       <p>
         If this user is not the one logged in, have [add] or [remove friend]
         button to perform that action
