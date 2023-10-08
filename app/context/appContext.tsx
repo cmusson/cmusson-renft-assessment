@@ -10,6 +10,7 @@ const AppContext = createContext({
   users: [] as IUser[],
   user: {} as IUser | undefined,
   setUser: (user: IUser | undefined) => {},
+  setUsers: (users: IUser[]) => {},
 });
 
 export const useAppContext = () => useContext(AppContext);
@@ -80,6 +81,7 @@ export const AppContextProvider = ({
         users,
         user,
         setUser,
+        setUsers,
       }}
     >
       {children}

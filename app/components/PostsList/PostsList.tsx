@@ -76,7 +76,7 @@ const PostsList = ({ type, titleUser }: IPostsListProps) => {
         .sort((a, b) => {
           const timestampA = new Date(a.timestamp).getTime();
           const timestampB = new Date(b.timestamp).getTime();
-          return timestampA - timestampB;
+          return timestampB - timestampA;
         })
         .map((post, i) => (
           <div key={i} className="border p-1">

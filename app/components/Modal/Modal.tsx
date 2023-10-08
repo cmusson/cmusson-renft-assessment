@@ -11,7 +11,7 @@ interface IModal {
 
 const Modal = ({ isOpen, handleClose }: IModal) => {
   const [postContent, setPostContent] = useState("");
-  const { user, setUser } = useAppContext();
+  const { user, setUser, setUsers } = useAppContext();
   // Form to submit a post into users post in local storage
   useEffect(() => {
     const closeOnEscapeKey = (e: KeyboardEvent) =>
@@ -55,6 +55,7 @@ const Modal = ({ isOpen, handleClose }: IModal) => {
           // Update the user's data in the users list in local storage
           usersList[sessionUserIndex] = updatedUser;
           localStorage.setItem("userAccounts", JSON.stringify(usersList));
+          setUsers(usersList);
         }
       }
 
