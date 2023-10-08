@@ -1,12 +1,12 @@
 "use client";
 
+import { useAppContext } from "@/app/context/appContext";
 import Link from "next/link";
-import { useState } from "react";
 
 const Navbar = () => {
   // if non logged in - Sign In, Sign Up
   // if logged in - Feed, Friends, Profile, Sign Out
-  const [isAuthenticated, setIsAuthenticated] = useState("");
+  const { isAuthenticated, user } = useAppContext();
 
   return (
     <>
@@ -15,7 +15,7 @@ const Navbar = () => {
           <Link href="/">f</Link>
           <Link href="/feed">[My Feed]</Link>
           <Link href="/friends">[My Friends]</Link>
-          <Link href={`/${"test"}`}>[My Profile]</Link>
+          <Link href={`/${user ? user.username : ""}`}>[My Profile]</Link>
           <Link href="/signOut">[Sign Out]</Link>
         </div>
       ) : (

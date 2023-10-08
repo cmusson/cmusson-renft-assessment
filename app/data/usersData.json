@@ -1,0 +1,84 @@
+[
+  {
+    "username": "alice",
+    "password": "alice1",
+    "friends": ["bob", "charlie"],
+    "posts": [
+      { "content": "Hello, world!", "timestamp": "2023-01-01T10:00:00.000Z" },
+      {
+        "content": "This is my first post.",
+        "timestamp": "2023-01-02T14:30:00.000Z"
+      }
+    ]
+  },
+  {
+    "username": "bob",
+    "password": "bob1",
+    "friends": ["alice", "david"],
+    "posts": [
+      { "content": "Hey there!", "timestamp": "2023-01-03T08:45:00.000Z" }
+    ]
+  },
+  {
+    "username": "charlie",
+    "password": "charlie1",
+    "friends": ["alice", "emma"],
+    "posts": []
+  },
+  {
+    "username": "david",
+    "password": "david1",
+    "friends": ["bob", "frank"],
+    "posts": [
+      { "content": "Good morning!", "timestamp": "2023-01-04T12:00:00.000Z" }
+    ]
+  },
+  {
+    "username": "emma",
+    "password": "emma1",
+    "friends": ["charlie", "grace"],
+    "posts": []
+  },
+  {
+    "username": "frank",
+    "password": "frank1",
+    "friends": ["david", "hannah"],
+    "posts": [
+      {
+        "content": "Testing my first post!",
+        "timestamp": "2023-01-05T09:30:00.000Z"
+      }
+    ]
+  },
+  {
+    "username": "grace",
+    "password": "grace1",
+    "friends": ["emma", "ian"],
+    "posts": []
+  },
+  {
+    "username": "hannah",
+    "password": "hannah1",
+    "friends": ["frank", "julia"],
+    "posts": [
+      {
+        "content": "Just joined the platform!",
+        "timestamp": "2023-01-06T15:15:00.000Z"
+      }
+    ]
+  },
+  {
+    "username": "ian",
+    "password": "ian1",
+    "friends": ["grace", "alice"],
+    "posts": []
+  },
+  {
+    "username": "julia",
+    "password": "julia1",
+    "friends": ["hannah"],
+    "posts": [
+      { "content": "Hello, everyone!", "timestamp": "2023-01-07T11:20:00.000Z" }
+    ]
+  }
+]
