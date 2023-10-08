@@ -9,7 +9,6 @@ const ModalButton = () => {
   const [modalOpen, setModal] = useState(false);
 
   const openCloseModal = useCallback(() => {
-    console.log("fired");
     setModal((prevState) => !prevState);
   }, []);
 

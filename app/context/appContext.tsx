@@ -1,14 +1,14 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
 import userAccounts from "../data/usersData.json";
-import { User } from "../typings/interfaces";
+import { IUser } from "../typings/interfaces";
 
 const AppContext = createContext({
   isAuthenticated: false,
   login: () => {},
   logout: () => {},
-  users: [] as User[],
-  user: {} as User | undefined,
+  users: [] as IUser[],
+  user: {} as IUser | undefined,
 });
 
 export const useAppContext = () => useContext(AppContext);
@@ -22,8 +22,8 @@ export const AppContextProvider = ({
   // Session storage authentication and the user authenticated
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [users, setUsers] = useState<User[]>([]);
-  const [user, setUser] = useState<User | undefined>();
+  const [users, setUsers] = useState<IUser[]>([]);
+  const [user, setUser] = useState<IUser | undefined>();
 
   const getDataFromLocalStorage = () => {
     const userAccountsJSON = localStorage.getItem("userAccounts");

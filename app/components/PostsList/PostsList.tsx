@@ -1,5 +1,6 @@
 "use client";
 import { useAppContext } from "@/app/context/appContext";
+import { IPost } from "@/app/typings/interfaces";
 
 interface IPostsListProps {
   type: "all" | "friends" | "myPosts";
@@ -12,18 +13,33 @@ const PostsList = ({ type }: IPostsListProps) => {
 
   const { users, isAuthenticated, user } = useAppContext();
 
-  const userPostsArray = user
+  const myPostsArray = user
     ? user.posts.map((post) => ({ username: user.username, ...post }))
     : [];
+
+  const friendsPostArray = user
+    ? user.friends.reduce((acc, friendName) => {
+        const friend = users.find((u) => u.username === friendName);
+        if (friend) {
+          const friendPosts = friend.posts.map((post) => ({
+            username: friend.username,
+            content: post.content,
+            timestamp: post.timestamp,
+          })) as IPost[];
+          return acc.concat(friendPosts);
+        }
+        return acc;
+      }, [] as IPost[])
+    : ([] as IPost[]);
 
   const allPostsArray = users.reduce((accumulator, user) => {
     const userPosts = user.posts.map((post) => ({
       content: post.content,
       timestamp: post.timestamp,
       username: user.username,
-    })) as { content: string; timestamp: string; username: string }[];
+    })) as IPost[];
     return accumulator.concat(userPosts);
-  }, [] as { content: string; timestamp: string; username: string }[]);
+  }, [] as IPost[]);
 
   const formatTimeStamp = (timestamp: string) => {
     const date = new Date(timestamp);
@@ -34,7 +50,11 @@ const PostsList = ({ type }: IPostsListProps) => {
   };
 
   const postArray =
-    type === "all" ? allPostsArray : "friends" ? allPostsArray : userPostsArray;
+    type === "all"
+      ? allPostsArray
+      : type === "friends"
+      ? friendsPostArray
+      : myPostsArray;
 
   return (
     <div>

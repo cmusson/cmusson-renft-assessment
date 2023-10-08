@@ -1,8 +1,9 @@
 "use client";
 
 import { useAppContext } from "@/app/context/appContext";
+import { IUser } from "@/app/typings/interfaces";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface IUserForm {
   type: "signIn" | "signUp";
@@ -25,18 +26,12 @@ const UserForm = ({ type }: IUserForm) => {
   const { login } = useAppContext();
   const { push } = useRouter();
 
-  const userSignUp = () => {
-    // add user to list of users in local storage and also in local state
-    // login on signup
-    return;
-  };
-
   const userSignIn = () => {
     const userAccountsJSON = localStorage.getItem("userAccounts");
     if (userAccountsJSON === null) {
       return [];
     }
-    const userAccounts = JSON.parse(userAccountsJSON) || [];
+    const userAccounts = JSON.parse(userAccountsJSON);
 
     const user = userAccounts.find((user: any) => user.username === username);
 
@@ -50,13 +45,55 @@ const UserForm = ({ type }: IUserForm) => {
     }
   };
 
+  const userSignUp = () => {
+    // Read the current userAccounts from local storage
+    const userAccountsJSON = localStorage.getItem("userAccounts");
+    if (userAccountsJSON === null) {
+      return [];
+    }
+    const userAccounts = JSON.parse(userAccountsJSON);
+
+    // Check if the username is already taken
+    const usernameExists = userAccounts.some(
+      (user: IUser) => user.username === username
+    );
+
+    if (usernameExists) {
+      alert("Username is already taken. Please choose a different one.");
+    } else {
+      // Create a new user object with the provided username and password
+      const newUser = {
+        username: username,
+        password: password,
+        friends: [],
+        posts: [],
+      };
+
+      // Add the new user to the userAccounts array
+      userAccounts.push(newUser);
+
+      // Update the userAccounts array in local storage
+      localStorage.setItem("userAccounts", JSON.stringify(userAccounts));
+
+      // Sign in the new user
+      sessionStorage.setItem("currentUser", JSON.stringify(newUser));
+      login();
+      push("/friends");
+      alert("Successfully signed up and logged in!");
+    }
+  };
+
+  const handleClick = type === "signIn" ? userSignIn : userSignUp;
+
+  useEffect(() => {}, []);
+
   return (
     <>
       <form
         className="flex flex-col items-center gap-2"
         onSubmit={(e) => {
           e.preventDefault();
-          userSignIn();
+          handleClick();
         }}
       >
         <input

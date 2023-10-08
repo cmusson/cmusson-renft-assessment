@@ -8,7 +8,7 @@ const SignOutButton = () => {
 
   const signOut = () => {
     logout();
-    alert("User signed out");
+    alert("IUser signed out");
     push("/");
   };
   return <button onClick={signOut}>Sign Out</button>;

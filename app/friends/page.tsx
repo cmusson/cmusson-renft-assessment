@@ -1,3 +1,5 @@
+import FriendsList from "../components/FriendsList";
+
 export default function Friends() {
   // List of friends for current user with each friend having an unfriend button
 
@@ -8,6 +10,7 @@ export default function Friends() {
         List of friends for current user with each friend having an unfriend
         button
       </p>
+      <FriendsList />
     </main>
   );
 }
