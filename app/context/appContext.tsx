@@ -50,6 +50,14 @@ export const AppContextProvider = ({
       // indicate initial data load has occurred
       localStorage.setItem("initialLoad", "true");
     }
+
+    if (hasInitialLoad) {
+      const accountsJSON = localStorage.getItem("userAccounts");
+      if (accountsJSON) {
+        const accounts = JSON.parse(accountsJSON);
+        setUsers(accounts);
+      }
+    }
   }, []);
 
   useEffect(() => {
